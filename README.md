@@ -9,6 +9,13 @@ Notes:
 - Data must only be stored in memory while software is running.
 - When ready to submit, create a "tag" called "Part1" in GitHub repository.
 
+Steps:
+- Enter the number of ingredients.
+- Enter ingredient name, quantity and then unit of measurement.
+- Enter the number of steps.
+- For each step, describe what must be done.
+- Display whole recipe in neat format.
+
 Methods:
 
 scale (int ratio)
