@@ -22,6 +22,7 @@ scale (int ratio)
 - Scale the ingredient quantities as requested.
 - Return an int value.
 - Or return an array with the new quantities.
+- Search the string, for keywords such as: tablespoon, teaspoon, cup, etc... Then scale it according.
 
 clearData()
 - Clears all data to enter new recipe.
