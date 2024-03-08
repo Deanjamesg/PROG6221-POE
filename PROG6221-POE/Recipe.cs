@@ -4,7 +4,6 @@
     {
         private string[] steps;
         private string[,] ingredients;
-        private string[] Prompt = { "Ingredient: ", "Quantity: ", "Unit of measurement: " };
 
         public Recipe(int _noIngredients, int _noSteps)
         {
@@ -12,9 +11,41 @@
             steps = new string[_noSteps];
         }
 
+        public void Scale(int val)
+        {
+
+            string[,] scaledIngredients = ingredients;
+
+            //Console.Clear();
+            Console.WriteLine("-----------------------------------\nIngredients Scaled by: " + val + "\n");
+
+            for (int i = 0; i < scaledIngredients.GetLength(0); i++)
+            {
+                int temp = int.Parse(scaledIngredients[i, 1]);
+                temp = temp * val;
+                scaledIngredients[i, 1] = temp.ToString();
+
+                Console.WriteLine(scaledIngredients[i, 1] + " " + scaledIngredients[i, 2] + " of " + scaledIngredients[i, 0]);
+
+            }
+
+            Console.WriteLine("-----------------------------------");
+
+            //Search for "teaspoon" or "tsp"
+
+            //Search for "tablespoon" or "tbsp"
+
+            //Search for "cup" or "c"
+
+            //Search for "ounce" or "oz"
+
+            //Search for "grams" or "g"
+
+        }
+
         public void Display()
         {
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("-----------------------------------\nIngredients: \n");
             for (int i = 0; i < ingredients.GetLength(0); i++)
             {
@@ -28,7 +59,10 @@
 
         public void IngredientPrompt()
         {
+            string[] Prompt = { "Ingredient: ", "Quantity: ", "Unit of measurement: " };
+
             Console.WriteLine("\nPlease enter the ingredients used, the quantity and unit of measurement: ");
+
             for (int i = 0; i < ingredients.GetLength(0); i++)
             {
                 Console.WriteLine("\nINGREDIENT NUMBER: " + (i + 1));
@@ -43,7 +77,7 @@
 
         public void StepsPrompt()
         {
-            Console.WriteLine("\nPlease enter the a description for each step: ");
+            Console.WriteLine("\nPlease enter a description for each step: ");
 
             for (int i = 0; i < steps.Length; i++)
             {

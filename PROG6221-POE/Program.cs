@@ -23,6 +23,10 @@
             recipe.StepsPrompt();
             recipe.Display();
 
+            recipe.Scale(3);
+
+
+
 
         }
 
