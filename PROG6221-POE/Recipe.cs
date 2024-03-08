@@ -2,13 +2,37 @@
 {
     class Recipe
     {
+        private string recipeName;
         private string[] steps;
         private string[,] ingredients;
 
-        public Recipe(int _noIngredients, int _noSteps)
+        public Recipe()
         {
-            ingredients = new string[_noIngredients, 3];
-            steps = new string[_noSteps];
+        }
+
+        public Recipe(string _recipeName, string[] _steps, string[,] _ingredients) { 
+
+            recipeName = _recipeName;
+            steps = _steps;
+            ingredients = _ingredients;
+        }
+
+        public string RecipeName
+        {
+            get { return recipeName; }
+            set { recipeName = value; }
+        }
+
+        public string[] Steps
+        {
+            get { return steps; }
+            set { steps = value; }
+        }
+
+        public string[,] Ingredients
+        { 
+            get { return ingredients; }
+            set { ingredients = value; }    
         }
 
         public void Scale(int val)
@@ -16,20 +40,14 @@
 
             string[,] scaledIngredients = ingredients;
 
-            //Console.Clear();
-            Console.WriteLine("-----------------------------------\nIngredients Scaled by: " + val + "\n");
-
             for (int i = 0; i < scaledIngredients.GetLength(0); i++)
             {
                 int temp = int.Parse(scaledIngredients[i, 1]);
                 temp = temp * val;
                 scaledIngredients[i, 1] = temp.ToString();
-
-                Console.WriteLine(scaledIngredients[i, 1] + " " + scaledIngredients[i, 2] + " of " + scaledIngredients[i, 0]);
-
             }
 
-            Console.WriteLine("-----------------------------------");
+            
 
             //Search for "teaspoon" or "tsp"
 
@@ -43,18 +61,26 @@
 
         }
 
-        public void Display()
+        public string Display()
         {
-            //Console.Clear();
-            Console.WriteLine("-----------------------------------\nIngredients: \n");
+            string display = "-----------------------------------\nIngredients: \n-----------------------------------\n";
+            
             for (int i = 0; i < ingredients.GetLength(0); i++)
             {
-                
-                Console.WriteLine(ingredients[i, 1] + " " + ingredients[i, 2] + " of " + ingredients[i, 0]);
+
+                display = display + ingredients[i, 1] + " " + ingredients[i, 2] + " of " + ingredients[i, 0] + "\n";
 
             }
-            Console.WriteLine("-----------------------------------");
+            display = display + "-----------------------------------\nSteps: \n-----------------------------------\n";
 
+            for (int i = 0; i < steps.Length; i++)
+            {
+
+                display = display + (i+1) + ") " + steps[i] + "\n";
+
+            }
+
+            return display;
         }
 
         public void IngredientPrompt()
