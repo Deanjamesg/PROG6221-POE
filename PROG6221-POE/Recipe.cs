@@ -10,7 +10,8 @@
         {
         }
 
-        public Recipe(string _recipeName, string[] _steps, string[,] _ingredients) { 
+        public Recipe(string _recipeName, string[] _steps, string[,] _ingredients) 
+        { 
 
             recipeName = _recipeName;
             steps = _steps;
@@ -35,40 +36,74 @@
             set { ingredients = value; }    
         }
 
-        public void Scale(int val)
+        public string Scale(double val)
         {
 
+            string scaledRecipe = "";
             string[,] scaledIngredients = ingredients;
 
             for (int i = 0; i < scaledIngredients.GetLength(0); i++)
             {
-                int temp = int.Parse(scaledIngredients[i, 1]);
+                double temp = double.Parse(scaledIngredients[i, 1]);
                 temp = temp * val;
                 scaledIngredients[i, 1] = temp.ToString();
+
+                switch (scaledIngredients[i, 2])
+                {
+                    case "tsp":
+                        if (double.Parse(scaledIngredients[i, 1]) >= 3)
+                        {
+                            double quantity = double.Parse(scaledIngredients[i, 1]);
+                            switch (quantity)
+                            {
+                                case 3:
+                                    scaledIngredients[i, 1] = 1.ToString(); scaledIngredients[i, 2] = "tbsp"; break;
+                                case 6:
+                                    scaledIngredients[i, 1] = 2.ToString(); scaledIngredients[i, 2] = "tbsp"; break;
+                                case 9:
+                                    scaledIngredients[i, 1] = 3.ToString(); scaledIngredients[i, 2] = "tbsp"; break;
+                                case 12:
+                                    scaledIngredients[i, 1] = 0.25.ToString(); scaledIngredients[i, 2] = "cup"; break;
+                            }
+                            
+                        }
+                        break;
+
+                    case "tbsp":
+                        if (double.Parse(scaledIngredients[i, 1]) >= 4)
+                        {
+                            double quantity = double.Parse(scaledIngredients[i, 1]);
+                            switch (quantity)
+                            {
+                                case 4:
+                                    scaledIngredients[i, 1] = 0.25.ToString(); scaledIngredients[i, 2] = "cup"; break;
+                                case 8:
+                                    scaledIngredients[i, 1] = 0.5.ToString(); scaledIngredients[i, 2] = "cup"; break;
+                                case 12:
+                                    scaledIngredients[i, 1] = 0.75.ToString(); scaledIngredients[i, 2] = "cup"; break;
+                                case 16:
+                                    scaledIngredients[i, 1] = 1.ToString(); scaledIngredients[i, 2] = "cup"; break;
+                            }
+                            
+                        }
+                        break;
+
+                }
+
             }
 
-            
-
-            //Search for "teaspoon" or "tsp"
-
-            //Search for "tablespoon" or "tbsp"
-
-            //Search for "cup" or "c"
-
-            //Search for "ounce" or "oz"
-
-            //Search for "grams" or "g"
-
+            scaledRecipe = Display(scaledIngredients);
+            return scaledRecipe;
         }
 
-        public string Display()
+        public string Display(string[,] _Ingredients)
         {
             string display = "-----------------------------------\nIngredients: \n-----------------------------------\n";
             
-            for (int i = 0; i < ingredients.GetLength(0); i++)
+            for (int i = 0; i < _Ingredients.GetLength(0); i++)
             {
 
-                display = display + ingredients[i, 1] + " " + ingredients[i, 2] + " of " + ingredients[i, 0] + "\n";
+                display = display + _Ingredients[i, 1] + " " + _Ingredients[i, 2] + " of " + _Ingredients[i, 0] + "\n";
 
             }
             display = display + "-----------------------------------\nSteps: \n-----------------------------------\n";
@@ -76,7 +111,7 @@
             for (int i = 0; i < steps.Length; i++)
             {
 
-                display = display + (i+1) + ") " + steps[i] + "\n";
+                display = display + (i + 1) + ") " + steps[i] + "\n";
 
             }
 
