@@ -20,9 +20,10 @@ Methods:
 
 scale (int ratio)
 - Scale the ingredient quantities as requested.
-- Return an int value.
-- Or return an array with the new quantities.
 - Search the string, for keywords such as: tablespoon, teaspoon, cup, etc... Then scale it according.
+- Check for unit of measurement after quantities are scaled:
+- If teaspoon quantity % 3 == 0 then convert to tablespoons.
+- Then if tablespoon quantity % 4 == 0 then convert to cups.
 
 clearData()
 - Clears all data to enter new recipe.
