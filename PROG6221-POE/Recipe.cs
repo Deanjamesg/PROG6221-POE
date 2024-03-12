@@ -40,7 +40,7 @@
         {
 
             string scaledRecipe = "";
-            string[,] scaledIngredients = ingredients;
+            string[,] scaledIngredients = (string[,])ingredients.Clone();
 
             for (int i = 0; i < scaledIngredients.GetLength(0); i++)
             {
